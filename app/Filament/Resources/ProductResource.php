@@ -23,6 +23,7 @@ use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 
@@ -33,6 +34,7 @@ class ProductResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack'; // custom icon menu
     protected static ?string $navigationLabel = 'Products'; // custom name menu
     protected static ?string $navigationGroup = 'Shop'; // for grouping menu
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -41,9 +43,9 @@ class ProductResource extends Resource
                 Group::make()->schema([
                     Section::make('Information')->schema([
                         TextInput::make('name')->required()->live(onBlur: false)->unique()->afterStateUpdated(function (string $operation, $state, Set $set) {
-                            if ($operation !== 'create') {
-                                return;
-                            }
+                            // if ($operation !== 'create') {
+                            //     return;
+                            // }
 
                             $set('slug', Str::slug($state));
                         }),
@@ -95,10 +97,14 @@ class ProductResource extends Resource
                     ->falseLabel('Only Hidden Products')
                     ->native(false),
 
-                SelectFilter::make('brand')->relationship('brand','name')
+                SelectFilter::make('brand')->relationship('brand', 'name')
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
