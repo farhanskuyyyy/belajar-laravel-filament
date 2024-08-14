@@ -30,6 +30,9 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Sky,
             ])
+            ->globalSearchKeyBindings([
+                'command+k','ctrl+k'
+            ])
             ->font("Poppins")
             ->favicon('images/e-catalog-favicon-color.svg')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

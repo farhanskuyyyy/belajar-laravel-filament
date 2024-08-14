@@ -26,6 +26,7 @@ use App\Filament\Resources\ProductResource\RelationManagers;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductResource extends Resource
 {
@@ -35,6 +36,23 @@ class ProductResource extends Resource
     protected static ?string $navigationLabel = 'Products'; // custom name menu
     protected static ?string $navigationGroup = 'Shop'; // for grouping menu
     protected static ?int $navigationSort = 2;
+    // protected static ?string $recordTitleAttribute = 'name'; // for setup global search
+    protected static int $globalSearchResultsLimit = 20; // limit global search
+
+
+    // for setup global search
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name','slug','description'];
+    }
+
+    // for setup global search detail
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Brand' => $record->brand->name
+        ];
+    }
 
     public static function form(Form $form): Form
     {
