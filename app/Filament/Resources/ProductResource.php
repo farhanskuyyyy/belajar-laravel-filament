@@ -95,7 +95,8 @@ class ProductResource extends Resource
                         FileUpload::make('image')->directory('form-attachment')->preserveFilenames()->image()->imageEditor()->required(),
                     ])->collapsible(),
                     Section::make('Associations')->schema([
-                        Select::make('brand_id')->relationship('brand', 'name'),
+                        Select::make('brand_id')->relationship('brand', 'name')->required(),
+                        Select::make('categories')->relationship('categories','name')->multiple()->required()
                     ])->collapsible(),
                 ])
             ]);

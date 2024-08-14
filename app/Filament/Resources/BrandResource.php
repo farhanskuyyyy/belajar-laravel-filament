@@ -21,6 +21,7 @@ use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\BrandResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BrandResource\RelationManagers;
+use App\Filament\Resources\BrandResource\RelationManagers\ProductsRelationManager;
 
 class BrandResource extends Resource
 {
@@ -93,7 +94,7 @@ class BrandResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ProductsRelationManager::class,
         ];
     }
 
