@@ -32,7 +32,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack'; // custom icon menu
+    protected static ?string $navigationIcon = 'heroicon-o-check-badge'; // custom icon menu
     protected static ?string $navigationLabel = 'Products'; // custom name menu
     protected static ?string $navigationGroup = 'Shop'; // for grouping menu
     protected static ?int $navigationSort = 2;
@@ -52,6 +52,11 @@ class ProductResource extends Resource
         return [
             'Brand' => $record->brand->name
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return 'NEW';
     }
 
     public static function form(Form $form): Form
