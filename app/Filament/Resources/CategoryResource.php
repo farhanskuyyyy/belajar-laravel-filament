@@ -22,6 +22,7 @@ use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\CategoryResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Filament\Resources\CategoryResource\RelationManagers\ProductsRelationManager;
 use Filament\Forms\Components\Select;
 
 class CategoryResource extends Resource
@@ -88,7 +89,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ProductsRelationManager::class
         ];
     }
 

@@ -18,4 +18,5 @@ class Customer extends Model
         'zip_code',
         'city'
     ];
+
 }
