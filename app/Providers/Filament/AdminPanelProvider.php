@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -50,6 +51,9 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-cog-6-tooth'),
 
                 'logout' => MenuItem::make()->label('Log out')
+            ])
+            ->plugins([
+                SpotlightPlugin::make()
             ])
             ->sidebarFullyCollapsibleOnDesktop()
             ->font("Poppins")
