@@ -65,7 +65,7 @@ class ProductResource extends Resource
             ->schema([
                 Group::make()->schema([
                     Section::make('Information')->schema([
-                        TextInput::make('name')->required()->live(onBlur: false)->unique()->afterStateUpdated(function (string $operation, $state, Set $set) {
+                        TextInput::make('name')->required()->live()->debounce(1000)->unique()->afterStateUpdated(function (string $operation, $state, Set $set) {
                             // if ($operation !== 'create') {
                             //     return;
                             // }
