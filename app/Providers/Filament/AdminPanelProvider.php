@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -53,7 +54,8 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => MenuItem::make()->label('Log out')
             ])
             ->plugins([
-                SpotlightPlugin::make()
+                SpotlightPlugin::make(),
+                FilamentShieldPlugin::make(),
             ])
             ->sidebarFullyCollapsibleOnDesktop()
             ->font("Poppins")
